@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import React from 'react'
 import Badge from './Badge'
 
@@ -13,13 +14,16 @@ const Card = ({ pokemon }) => {
                         <span className=' ml-1'>{pokemon.hp}</span>
                     </div>
                 </div>
-                <img className='w-auto h-36 mx-auto my-5' src={pokemon.sprites} />
-                <h2 className=' text-2xl font-bold text-center capitalize'>
+                <motion.img layoutId={pokemon.id} className='w-auto h-36 mx-auto my-5' src={pokemon.sprites} />
+                <h2
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 2 }}
+                    className=' text-2xl font-bold text-center capitalize'>
                     {pokemon.name}
                 </h2>
                 <div className='flex justify-around mt-4'>
                     {pokemon.types.map((item, index) => (
-                        <Badge type={pokemon.type} key={pokemon.name + index}>{item.type.name}</Badge>
+                        <Badge className={`bg-white/30 text-white ${pokemon.type}`} key={pokemon.name + index}>{item.type.name}</Badge>
                     ))}
                 </div>
                 <div className='mt-10 '>

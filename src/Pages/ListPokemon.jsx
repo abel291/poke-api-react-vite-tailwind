@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import Card from "../Components/Card";
 import { motion } from "framer-motion"
-import dataJson from "../data.json"
+import allPokemons from "../allPokemons.json"
 import { Link } from "react-router-dom";
+import { fechPokemon, fecthApi, fomartData } from "../helper";
+
 function ListPokemon() {
+
 	const [pokemons, setPokemons] = useState([])
+	let limitPokemon = 50
 	const container = {
 		hidden: { opacity: 0 },
 		show: {
@@ -19,39 +23,20 @@ function ListPokemon() {
 		hidden: { opacity: 0, scale: 0.95 },
 		show: { opacity: 1, scale: 1 }
 	}
-
-	const getSpecificPokemon = async (id) => {
-		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-		let json = await response.json();
-		console.log(json)
-		return {
-			id: json.id,
-			name: json.name,
-			sprites: json.sprites.other.dream_world.front_default,
-			type: json.types[0].type.name,
-			types: json.types,
-			hp: json.stats[0].base_stat,
-			attack: json.stats[1].base_stat,
-			defense: json.stats[2].base_stat,
-			speed: json.stats[3].base_stat,
-
-		}
-	}
 	const getPokemons = async (porPokemon) => {
-		let limitPoke = 50
-		let pokemones = []
-		for (let i = 1; i <= limitPoke; i++) {
-			let data = await getSpecificPokemon(i)
-			pokemones.push(data)
+		let pokemones = []	
+		
+		for (let i = 1; i <= limitPokemon; i++) {
+			await fechPokemon(i).then((data) => {
+				pokemones[i] = data
+			})
 		}
-		return pokemones
+
+		setPokemons(pokemones)
 	}
 	useEffect(() => {
-		// getPokemons()
-		//   .then((data) => {
-		//     setPokemons(data);
-		//   })
-		setPokemons(dataJson);
+		getPokemons()
+		//setPokemons(dataJson);
 	}, [])
 
 
@@ -67,7 +52,7 @@ function ListPokemon() {
 				>
 					{pokemons.map((item, index) => (
 						<motion.div key={index} variants={transitionChildren}>
-							<Link to={"pokemon/" + item.id}>
+							<Link to={"pokemon/" + item.id} state={item}>
 								<Card key={item.name + index} pokemon={item} />
 							</Link>
 						</motion.div>
