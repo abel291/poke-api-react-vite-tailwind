@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "../Components/Card";
 import { motion } from "framer-motion"
-import allPokemons from "../allPokemons.json"
+
 import { Link } from "react-router-dom";
 import { fechPokemon, fecthApi, fomartData } from "../helper";
 

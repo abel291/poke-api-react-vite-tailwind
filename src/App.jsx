@@ -1,7 +1,8 @@
 import React from 'react'
 import ListPokemon from './Pages/ListPokemon'
 import { Routes, Route } from "react-router-dom";
-import DetailsPokemon from './Pages/DetailsPokemon';
+import DetailsPokemon from './Pages/DetailsPokemon/DetailsPokemon';
+
 const App = () => {
 	return (
 		<div className="container mx-auto max-w-7xl">
