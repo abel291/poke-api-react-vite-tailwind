@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import LodingPage from '../../Components/LodingPage'
+import LoadingPage from '../../Components/LoadingPage'
 import { fecthAbilities } from '../../helper'
 
 const AbilitiesPokemon = ({ rawAbilities = [] }) => {
@@ -15,7 +15,7 @@ const AbilitiesPokemon = ({ rawAbilities = [] }) => {
     }, [])
 
 
-    if (abilities.length === 0) { return <LodingPage lines={5} /> }
+    if (abilities.length === 0) { return <LoadingPage lines={5} /> }
 
     return (
         <div className='space-y-3'>

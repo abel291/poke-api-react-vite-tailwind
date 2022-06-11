@@ -10,8 +10,8 @@ const Card = ({ pokemon }) => {
             <div className='relative'>
                 <div className='text-right'>
                     <div className='  bg-white text-black  px-4 py-2 rounded-full inline-block '>
-                        <span className='text-xs font-semibold'>HP</span>
-                        <span className=' ml-1'>{pokemon.hp}</span>
+                        <span className='text-xs font-semibold'>EXP</span>
+                        <span className=' ml-1'>{pokemon.exp}</span>
                     </div>
                 </div>
                 <motion.img layoutId={pokemon.id} className='w-auto h-36 mx-auto my-5' src={pokemon.sprites} />
@@ -29,15 +29,15 @@ const Card = ({ pokemon }) => {
                 <div className='mt-10 '>
                     <div className='flex justify-between items-center '>
                         <div className='text-center'>
-                            <h3 className='block font-bold'>{pokemon.attack}</h3>
+                            <h3 className='block font-bold'>{pokemon.stats.attack}</h3>
                             <span className='block '>Ataque</span>
                         </div>
                         <div className='text-center'>
-                            <h3 className='block font-bold'>{pokemon.defense}</h3>
+                            <h3 className='block font-bold'>{pokemon.stats.defense}</h3>
                             <span className='block '>Defensa</span>
                         </div>
                         <div className='text-center'>
-                            <h3 className='block font-bold'>{pokemon.speed}</h3>
+                            <h3 className='block font-bold'>{pokemon.stats.speed}</h3>
                             <span className='block '>Velocidad</span>
                         </div>
                     </div>

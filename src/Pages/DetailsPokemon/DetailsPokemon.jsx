@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 import Badge from '../../Components/Badge';
+import BadgeTop from '../../Components/BadgeTop';
 import { fechPokemon } from '../../helper';
 
 import AbilitiesPokemon from './AbilitiesPokemon';
@@ -28,6 +29,7 @@ const DetailsPokemon = () => {
 		<div className='max-w-xl mx-auto'>
 			<div className={' mx-auto  rounded-xl relative border border-gray-200 overflow-hidden shadow-2xl ' + pokemon.type}>
 				<div className='p-5'>
+					<div className='flex justify-between'>
 					<motion.h2
 						initial={{ x: -50, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
@@ -35,9 +37,11 @@ const DetailsPokemon = () => {
 						className=' text-2xl font-bold capitalize text-white'>
 						{pokemon.name}
 					</motion.h2>
+					<BadgeTop title="EXP" value={pokemon.exp}/>
+					</div>
 					<div className='flex flex-wrap gap-2 mt-2'>
 						{pokemon.types.map((item, index) => (
-							<Badge className="bg-white/30 text-white" key={pokemon.name + index}>{item.type.name}</Badge>
+							<Badge className="bg-white/40 text-white" key={pokemon.name + index}>{item.type.name}</Badge>
 						))}
 					</div>
 					<motion.img layoutId={pokemon.id}

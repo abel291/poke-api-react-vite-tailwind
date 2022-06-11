@@ -1,4 +1,4 @@
-const LodingPage = ({ lines = 3 }) => {
+const LoadingPage = ({ lines = 3 }) => {
     return (
         <div className='animate-pulse space-y-3 mt-2'>
             <div className='p-1.5 rounded bg-gray-200 w-1/2'></div>
@@ -8,4 +8,4 @@ const LodingPage = ({ lines = 3 }) => {
         </div>
     )
 }
-export default LodingPage
+export default LoadingPage

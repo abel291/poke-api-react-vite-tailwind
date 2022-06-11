@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import LodingPage from '../../Components/LodingPage'
+import LoadingPage from '../../Components/LoadingPage'
 import { fecthApi, fecthSpecies } from '../../helper'
 const SpeciesPokemon = ({ rawSpecies }) => {
 
@@ -8,13 +8,12 @@ const SpeciesPokemon = ({ rawSpecies }) => {
     useEffect(() => {
         setTimeout(() => {
             fecthSpecies(rawSpecies).then((data)=>{
-                console.log(data)
                 setSpecies(data)
             })
         }, 1000);
     }, [])
 
-    if (!species) { return <LodingPage lines={2} /> }
+    if (!species) { return <LoadingPage lines={2} /> }
     return (
         <p >{species}</p>
     )

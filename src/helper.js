@@ -12,12 +12,12 @@ export const fechPokemon = async (id) => {
     return dataFormat
 }
 export const formatStast = (stats) => {
-    let newStats = stats.map((item) => {
-        return {
-            value: item.base_stat,
-            name: item.stat.name
-        }
+    let newStats={}
+    stats.forEach((item) => {
+        newStats[item.stat.name]=item.base_stat
+        
     })
+    
     return newStats
 }
 export const fomartData = (data) => {
@@ -29,6 +29,7 @@ export const fomartData = (data) => {
         types: data.types,
         abilities: data.abilities,
         species: data.species,
+        exp: data.base_experience,
         stats: formatStast(data.stats)
     }
 }
