@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Badge from '../../Components/Badge';
 import BadgeTop from '../../Components/BadgeTop';
 import { fechPokemon } from '../../helper';
+import LoadingList from '../ListPokemons/LoadingList';
 
 import AbilitiesPokemon from './AbilitiesPokemon';
 import SpeciesPokemon from './SpeciesPokemon';
@@ -13,31 +14,30 @@ const DetailsPokemon = () => {
 	let { id } = useParams();
 	let location = useLocation();
 	const [pokemon, setPokemon] = useState(location.state)
-
+	
 	useEffect(() => {
-		// if (location.state) {
-		// 	setPokemon(location.state)
-		// } else {
-		// 	fechPokemon(id).then((data) => {
-		// 		setPokemon(data)
-		// 	})
-		// }
-	}, [])
 
+		if (!location.state) {
+			fechPokemon(id).then((data) => {
+				setPokemon(data)
+			})
+		}
+	}, [])
+	if (!pokemon) { return <LoadingList /> }
 
 	return (
-		<div className='max-w-xl mx-auto'>
+		<div className='max-w-xl mx-auto mb-5'>
 			<div className={' mx-auto  rounded-xl relative border border-gray-200 overflow-hidden shadow-2xl ' + pokemon.type}>
 				<div className='p-5'>
 					<div className='flex justify-between'>
-					<motion.h2
-						initial={{ x: -50, opacity: 0 }}
-						animate={{ x: 0, opacity: 1 }}
-						transition={{ duration: .5 }}
-						className=' text-2xl font-bold capitalize text-white'>
-						{pokemon.name}
-					</motion.h2>
-					<BadgeTop title="EXP" value={pokemon.exp}/>
+						<motion.h2
+							initial={{ x: -50, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							transition={{ duration: .5 }}
+							className=' text-2xl font-bold capitalize text-white'>
+							{pokemon.name}
+						</motion.h2>
+						<BadgeTop title="EXP" value={pokemon.exp} />
 					</div>
 					<div className='flex flex-wrap gap-2 mt-2'>
 						{pokemon.types.map((item, index) => (
